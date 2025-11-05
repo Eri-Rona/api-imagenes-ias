@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IAAS - Generador de Imágenes Personalizadas</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎨 IAAS</h1>
+            <p class="subtitle">Generador de Imágenes Personalizadas con IA</p>
+        </header>
+
+        <div class="search-section">
+            <div class="search-tabs">
+                <button class="tab-btn active" data-tab="generate"><span>Generar Imagen</span></button>
+                <button class="tab-btn" data-tab="gallery"><span>Mi Galería</span></button>
+            </div>
+
+            <!-- Generar Imagen -->
+            <div class="tab-content active" id="generate">
+                <div class="generation-form">
+                    <div class="form-group">
+                        <label for="prompt-input">Describe la imagen que deseas crear:</label>
+                        <textarea 
+                            id="prompt-input" 
+                            class="form-control" 
+                            rows="4" 
+                            placeholder="Ej: Un gato astronauta flotando en el espacio, estilo cartoon, colores vibrantes..."
+                        ></textarea>
+                    </div>
+
+                    <div class="form-options">
+                        <div class="option-group">
+                            <label for="image-size">Tamaño:</label>
+                            <select id="image-size" class="form-select">
+                                <option value="512x512">512x512 (Pequeño)</option>
+                                <option value="768x768" selected>768x768 (Mediano)</option>
+                                <option value="1024x1024">1024x1024 (Grande)</option>
+                                <option value="1024x768">1024x768 (Panorámico)</option>
+                            </select>
+                        </div>
+
+                        <div class="option-group">
+                            <label for="image-style">Estilo:</label>
+                            <select id="image-style" class="form-select">
+                                <option value="realistic">Realista</option>
+                                <option value="cartoon">Cartoon</option>
+                                <option value="anime">Anime</option>
+                                <option value="digital-art">Arte Digital</option>
+                                <option value="oil-painting">Pintura al Óleo</option>
+                                <option value="watercolor">Acuarela</option>
+                                <option value="3d-render">Render 3D</option>
+                            </select>
+                        </div>
+
+                        <div class="option-group">
+                            <label for="num-images">Cantidad:</label>
+                            <select id="num-images" class="form-select">
+                                <option value="1" selected>1 Imagen</option>
+                                <option value="2">2 Imágenes</option>
+                                <option value="4">4 Imágenes</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <button onclick="generateImage()" class="generate-btn">
+                        <span class="btn-text">✨ Generar Imagen</span>
+                        <span class="btn-loader hidden">⏳ Generando...</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Galería -->
+            <div class="tab-content" id="gallery">
+                <div class="gallery-info">
+                    <p>Imágenes generadas se mostrarán aquí</p>
+                    <button onclick="clearGallery()" class="btn-clear">Limpiar Galería</button>
+                </div>
+                <div id="gallery-grid" class="gallery-grid"></div>
+            </div>
+        </div>
+
+        <div id="loading" class="loading hidden">
+            <div class="spinner"></div>
+            <p>Generando tu imagen personalizada...</p>
+            <p class="loading-subtitle">Esto puede tomar unos segundos</p>
+        </div>
+
+        <div id="results" class="results"></div>
+
+        <!-- Modal para vista ampliada -->
+        <div id="image-modal" class="modal hidden">
+            <div class="modal-content">
+                <span class="close-modal">&times;</span>
+                <div id="modal-body"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
+
